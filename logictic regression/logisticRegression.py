@@ -1,15 +1,5 @@
-import pandas as pd
 import math
 import numpy as np
-
-data = pd.read_csv('diabetes.csv')
-
-outcome = data.pop('Outcome')
-
-y = outcome.to_numpy()
-x_train = data.to_numpy()
-
-print(data.head())
 
 
 def sigmoid(z):
@@ -86,11 +76,3 @@ def predict(X, w, b):
         p[i] = f_wb >= 0.5
 
     return p
-
-w_in = np.zeros_like(x_train[0])
-b_in = 0.
-
-w_out, b_out, J_history, w_history = gradient_descent(x_train,y,w_in,b_in,compute_cost,compute_gradient,0.4,700,8)
-
-p = predict(x_train, w_out,b_out)
-print('Train Accuracy: %f'%(np.mean(p == y) * 100))
